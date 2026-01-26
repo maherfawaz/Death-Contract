@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 71216b57d76561d4eb9295aafb24dfc8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 342452
+  packageName: Pixel-Streets
+  packageVersion: 1.0
+  assetPath: Assets/PixelStreets/Decorations/Prefabs/TrafficCone/TrafficCone_Small.prefab
+  uploadId: 812470

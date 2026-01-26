@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 64e06413157bc174aacc742f277dadb5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 342452
+  packageName: Pixel-Streets
+  packageVersion: 1.0
+  assetPath: Assets/PixelStreets/Enviroment/Tiles/Environment_256.asset
+  uploadId: 812470

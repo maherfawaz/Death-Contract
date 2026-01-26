@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d48946422ee7fc24cbefeab74d3a8466
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 342452
+  packageName: Pixel-Streets
+  packageVersion: 1.0
+  assetPath: Assets/PixelStreets/Decorations/Prefabs/Signs/StopSign_Back.prefab
+  uploadId: 812470

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fce1532d36fc57d449ed60a06b273fed
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 342452
+  packageName: Pixel-Streets
+  packageVersion: 1.0
+  assetPath: Assets/PixelStreets/Decorations/Prefabs/TrashBin/TrashBin_Empty_Yellow_Front.prefab
+  uploadId: 812470

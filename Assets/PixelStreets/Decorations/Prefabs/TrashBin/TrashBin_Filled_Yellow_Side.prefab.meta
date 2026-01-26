@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 319c5e3d7e59cf4449cf18f9dda875c5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 342452
+  packageName: Pixel-Streets
+  packageVersion: 1.0
+  assetPath: Assets/PixelStreets/Decorations/Prefabs/TrashBin/TrashBin_Filled_Yellow_Side.prefab
+  uploadId: 812470
