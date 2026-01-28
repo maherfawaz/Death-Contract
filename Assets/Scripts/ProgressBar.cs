@@ -3,14 +3,21 @@ using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour
 {
-    public float maximum = 60f;
+    [Header("Inscribed")]
+    public float maximum;
+
+    [Header("Dynamic")]
     public float current;
-    public Image mask;
+    public Slider slider;
+
+    void Start() {
+        slider = GetComponent<Slider>();
+    }
 
     void Update() {
         current += Time.deltaTime;
         current = Mathf.Clamp(current, 0, maximum);
         float fillAmount = current / maximum;
-        mask.fillAmount = fillAmount;
+        slider.value = fillAmount;
     }
 }
