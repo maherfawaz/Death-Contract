@@ -49,9 +49,7 @@ public class VehicleMovement : MonoBehaviour {
     }
 
     private void MoveX() {
-        if (currentAcceleration < 0) {
-            currentAcceleration *= decelerationAmount;
-        } else if (currentAcceleration > 0) {
+        if (currentAcceleration > 0) {
             currentAcceleration *= accelerationAmount;
         }
 
