@@ -198,9 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb71223a9f247974da27d9e723703e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.3
-  distance: 25
+  speed: 10
+  distance: 50
   damageAmount: 1
+  crashSFX: {fileID: 8300000, guid: d1698dd553af8ef4d887bc83b9687173, type: 3}
 --- !u!1 &1453436694261698140
 GameObject:
   m_ObjectHideFlags: 0

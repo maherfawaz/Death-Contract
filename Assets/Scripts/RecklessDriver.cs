@@ -12,6 +12,9 @@ public class RecklessDriver : MonoBehaviour
 
     private Vector2 destination;
 
+    [Space(5)]
+    [SerializeField] private AudioClip crashSFX;
+
     private void Awake() 
     {
         activationTrigger = GetComponent<CircleCollider2D>();    
@@ -34,11 +37,12 @@ public class RecklessDriver : MonoBehaviour
     private void Drive() 
     {
         // DRIVE FORWARD
-        this.transform.position = Vector2.MoveTowards(this.transform.position, destination, speed);
+        this.transform.position = Vector2.MoveTowards(this.transform.position, destination, speed * Time.deltaTime);
     }
 
     public void Explode() 
     {
+        SoundEffectsManager.instance.PlayAudioClip(crashSFX);
         Destroy(this.gameObject);
         Debug.Log("Car Exploded!");
     }

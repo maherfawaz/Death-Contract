@@ -298,6 +298,7 @@ MonoBehaviour:
   explosion: {fileID: 1278090422234565432}
   explosionExpansionSpeed: 0.2
   explosionFadeoutDuration: 1
+  explodeSFX: {fileID: 8300000, guid: d1698dd553af8ef4d887bc83b9687173, type: 3}
 --- !u!1 &6183859882987007038
 GameObject:
   m_ObjectHideFlags: 0

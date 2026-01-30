@@ -11,6 +11,9 @@ public class Mine : MonoBehaviour {
 
     private bool isActivated = false;
 
+    [Space(5)]
+    [SerializeField] private AudioClip explodeSFX;
+
     private void Awake() {
         explosion.SetActive(false);
     }
@@ -28,6 +31,8 @@ public class Mine : MonoBehaviour {
     private IEnumerator ExplosionSequence() {
 
         isActivated = true;
+
+        SoundEffectsManager.instance.PlayAudioClip(explodeSFX);
 
         Vector3 explosionScale = explosion.transform.localScale;
 
