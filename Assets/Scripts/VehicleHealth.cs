@@ -125,6 +125,14 @@ public class VehicleHealth : MonoBehaviour {
             CheckIfDeath();
         }
 
+        if (collision.gameObject.CompareTag("Missile")) {
+            TakeDamage(collision.GetComponentInParent<Missile>().GetDamageAmount());
+            collision.GetComponentInParent<Missile>().Explode();
+
+            Debug.Log("You hit a missile!");
+            CheckIfDeath();
+        }
+
         if (collision.gameObject.CompareTag("Finish Line")) {
 
             Victory();

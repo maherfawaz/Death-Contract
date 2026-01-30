@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -6,7 +7,7 @@ public class Missile : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float distance = 50f;
 
-    [SerializeField] private float damageAmount = 20f;
+    [SerializeField] private int damageAmount = 1;
     [SerializeField] private float positionPredictionAmount = 15f;
 
     private Vector3 destination;
@@ -14,9 +15,16 @@ public class Missile : MonoBehaviour
 
     private bool isFired = false;
 
+    private bool isLockedIn = false;
+
+    [Space(5)]
+    [SerializeField] private AudioClip explosionSFX;
+    [SerializeField] private GameObject explosion;
+
     private void Awake() 
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        destination = new Vector3(this.transform.position.x, this.transform.position.y + distance);
     }
 
     private void Start() 
@@ -38,39 +46,31 @@ public class Missile : MonoBehaviour
         }
     }
 
-    private void LookAtPlayer() 
-    {
-        Debug.Log("Lock On!");
-
-        destination = new Vector2(playerTransform.position.x + positionPredictionAmount, playerTransform.position.y);
-
-        Vector3 direction = destination - this.transform.position;
-        
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        angle -= 90f;
-
-        this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    }
-
     private void Flight() 
     {
-        this.transform.position = Vector2.MoveTowards(this.transform.position, destination * 5, speed * Time.deltaTime);
-        //this.transform.Translate(-transform.up * speed * Time.deltaTime);
+        this.transform.position += (transform.up * speed * Time.deltaTime);
     }
 
     public void Explode() 
     {
+        GameObject newExplosion = Instantiate(explosion, this.transform.position, Quaternion.identity);
+        newExplosion.SetActive(true);
+
+        SoundEffectsManager.instance.PlayAudioClip(explosionSFX);
+
         Destroy(this.gameObject);
     }
 
+    public int GetDamageAmount() {
+        return damageAmount;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision) {
 
         if (collision.gameObject.CompareTag("Player")) {
 
-            LookAtPlayer();
             isFired = true;
-
+            Debug.Log("Missile fired!");
         }
     }
 }
