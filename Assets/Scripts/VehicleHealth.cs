@@ -29,10 +29,14 @@ public class VehicleHealth : MonoBehaviour {
     [SerializeField] private GameObject[] heartsGO;
     [SerializeField] private Stack<GameObject> heartStack;
 
+    [SerializeField] private List<SpriteRenderer> vehicleSprites;
+
     private void Awake() {
         currentHeath = maxHealth;
         vehicleMovement = GetComponent<VehicleMovement>();
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        vehicleSprites = new List<SpriteRenderer>(GetComponentsInChildren<SpriteRenderer>());
 
         if (deathScreen) { deathScreen.SetActive(false); }
         if (victoryScreen) {  victoryScreen.SetActive(false); }
@@ -63,6 +67,7 @@ public class VehicleHealth : MonoBehaviour {
         if (isDeath)
         {
             vehicleMovement.enabled = false;
+            vehicleSprites.ForEach(sprite => sprite.enabled = false);
 
             StartCoroutine(DeathSequence());
         }

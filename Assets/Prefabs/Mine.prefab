@@ -296,9 +296,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 1
   explosion: {fileID: 2223624286330051508, guid: c26f1e1397bfd5e4587d4c6512268091, type: 3}
-  explosionExpansionSpeed: 0.2
-  explosionFadeoutDuration: 1
+  explosionDuration: 5
   explodeSFX: {fileID: 8300000, guid: d1698dd553af8ef4d887bc83b9687173, type: 3}
+  mineSprite: {fileID: 0}
+  mineSprite2: {fileID: 1129461304715901732}
 --- !u!1 &6183859882987007038
 GameObject:
   m_ObjectHideFlags: 0

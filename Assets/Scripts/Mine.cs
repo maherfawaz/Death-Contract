@@ -14,8 +14,12 @@ public class Mine : MonoBehaviour {
     [Space(5)]
     [SerializeField] private AudioClip explodeSFX;
 
+    [SerializeField] private SpriteRenderer mineSprite;
+    [SerializeField] private SpriteRenderer mineSprite2;
+
     private void Awake() {
         explosion.SetActive(false);
+        mineSprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     public void Explode() {
@@ -31,6 +35,9 @@ public class Mine : MonoBehaviour {
     private IEnumerator ExplosionSequence() {
 
         isActivated = true;
+
+        mineSprite.enabled = false;
+        mineSprite2.enabled = false;
 
         SoundEffectsManager.instance.PlayAudioClip(explodeSFX);
 
