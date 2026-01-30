@@ -38,6 +38,7 @@ public class VehicleMovement : MonoBehaviour {
         // HORIZONTAL INPUT
         currentAcceleration = playerInput.VehicleMovement.Acceleration.ReadValue<Vector2>().x;
         MoveX();
+        SwitchLanes();
     }
 
     private void StartingVehiclePosition() {
@@ -58,32 +59,6 @@ public class VehicleMovement : MonoBehaviour {
         this.transform.position += targetPosition;
     }
 
-    private void MoveY() {
-        int direction = Mathf.RoundToInt(playerInput.VehicleMovement.Acceleration.ReadValue<Vector2>().x);
-
-        Debug.Log("DirectionX: " + direction);
-
-        currentLane += direction;
-        currentLane = Mathf.Clamp(currentLane, -laneQuantity, laneQuantity);
-
-        Vector3 targetPosition = transform.right * (currentLane + laneWidth);
-        this.transform.position += targetPosition;
-
-        for (int i = 0; i < laneQuantity; i++) {
-            Vector2 laneStart = transform.right * (i + laneWidth);
-            Vector2 laneEnd = new Vector2(laneStart.x, laneStart.y + 10f);
-
-            Debug.DrawLine(laneStart, laneEnd, Color.red);
-        }
-
-        for (int i = 0; i > -laneQuantity; i--) {
-            Vector2 laneStart = transform.right * (i - laneWidth);
-            Vector2 laneEnd = new Vector2(laneStart.x, laneStart.y + 10f);
-
-            Debug.DrawLine(laneStart, laneEnd, Color.yellow);
-        }
-    }
-
     private void MoveUp() {
         Debug.Log("Move Up");
 
@@ -92,9 +67,6 @@ public class VehicleMovement : MonoBehaviour {
         }
 
         currentLane--;
-
-        Vector3 targetPosition = new Vector3(this.transform.position.x, lanes[currentLane].position.y);
-        StartCoroutine(SwitchLane(targetPosition));
     }
 
     private void MoveDown() {
@@ -105,23 +77,11 @@ public class VehicleMovement : MonoBehaviour {
         }
 
         currentLane++;
-
-        Vector3 targetPosition = new Vector3(this.transform.position.x, lanes[currentLane].position.y);
-        StartCoroutine(SwitchLane(targetPosition));
     }
 
-    private IEnumerator SwitchLane(Vector3 lane) {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < speedY) {
-            this.transform.position = Vector3.Lerp(this.transform.position, lane, (elapsedTime / speedY));
-            MoveX();
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        this.transform.position = new Vector3(this.transform.position.x, lane.y);
+    private void SwitchLanes() {
+        Vector3 targetPosition = new Vector3(this.transform.position.x, lanes[currentLane].position.y);
+        this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, speedY * Time.deltaTime);
     }
 
     private void OnEnable() {

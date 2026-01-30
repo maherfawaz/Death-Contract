@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mine
   - Reckless Driver
+  - Finish Line
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Background
+  - Explosion
   - 
   - 
   - 
@@ -42,6 +43,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1646005525
+    locked: 0
+  - name: Explosion
+    uniqueID: 1749633535
     locked: 0
   m_RenderingLayers:
   - Default

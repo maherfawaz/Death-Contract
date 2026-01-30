@@ -1,8 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEditor.Build.Content;
 
 public class VehicleHealth : MonoBehaviour {
     [SerializeField] private float maxHealth = 100;
@@ -12,6 +14,7 @@ public class VehicleHealth : MonoBehaviour {
 
     [Space(5)]
     [SerializeField] private float respawnTime = 3f;
+    [SerializeField] private float deathDuration = 1f;
     private VehicleMovement vehicleMovement;
 
     private int currentSceneIndex;
@@ -20,12 +23,40 @@ public class VehicleHealth : MonoBehaviour {
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private TextMeshProUGUI deathScreenRespawnCountdown;
 
+    [Space(5)]
+    [SerializeField] private GameObject victoryScreen;
+
+    [Space(5)]
+    [SerializeField] private GameObject[] heartsGO;
+    [SerializeField] private Stack<GameObject> heartStack;
+
     private void Awake() {
         currentHeath = maxHealth;
         vehicleMovement = GetComponent<VehicleMovement>();
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         if (deathScreen) { deathScreen.SetActive(false); }
+        if (victoryScreen) {  victoryScreen.SetActive(false); }
+
+        AddHeartsToStack();
+    }
+
+    private void AddHeartsToStack() {
+
+        if (heartsGO == null) { return; }
+
+        heartStack = new Stack<GameObject>();
+
+        foreach (GameObject heart in heartsGO) {
+            heartStack.Push(heart);
+        }
+    }
+
+    private void Victory() {
+
+        vehicleMovement.enabled = false;
+
+        if ( victoryScreen) { victoryScreen.SetActive(true); }
     }
 
     private void CheckIfDeath() {
@@ -34,8 +65,6 @@ public class VehicleHealth : MonoBehaviour {
         {
             vehicleMovement.enabled = false;
 
-            if (deathScreen) { deathScreen.SetActive(true); }
-
             StartCoroutine(DeathSequence());
         }
     }
@@ -43,6 +72,10 @@ public class VehicleHealth : MonoBehaviour {
     private IEnumerator DeathSequence() {
 
         Debug.Log("You died!");
+
+        yield return new WaitForSeconds(deathDuration);
+
+        if (deathScreen) { deathScreen.SetActive(true); }
 
         float elapsedTime = 0f;
 
@@ -65,6 +98,11 @@ public class VehicleHealth : MonoBehaviour {
         currentHeath = Mathf.Clamp(currentHeath, 0, maxHealth);
 
         isDeath = currentHeath <= 0;
+
+        if (heartStack.Count > 0) {
+            GameObject heart = heartStack.Pop();
+            heart.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) 
@@ -85,6 +123,12 @@ public class VehicleHealth : MonoBehaviour {
 
             Debug.Log("You hit a car!");
             CheckIfDeath();
+        }
+
+        if (collision.gameObject.CompareTag("Finish Line")) {
+
+            Victory();
+            Debug.Log("You survived!");
         }
     }
 }

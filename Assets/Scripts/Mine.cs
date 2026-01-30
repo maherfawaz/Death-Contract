@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class Mine : MonoBehaviour {
@@ -6,8 +7,7 @@ public class Mine : MonoBehaviour {
 
     [Space(5)]
     [SerializeField] private GameObject explosion;
-    [SerializeField] private float explosionExpansionSpeed = 1f;
-    [SerializeField] private float explosionFadeoutDuration = 5f;
+    [SerializeField] private float explosionDuration = 5f;
 
     private bool isActivated = false;
 
@@ -36,20 +36,16 @@ public class Mine : MonoBehaviour {
 
         Vector3 explosionScale = explosion.transform.localScale;
 
-        explosion.SetActive(true);
-        explosion.transform.localScale = Vector3.zero;
+        GameObject newExplosion =  Instantiate(explosion, this.transform.position, Quaternion.identity);
+        newExplosion.transform.parent = this.transform;
+        newExplosion.SetActive(true);
 
-        float elapsedTime = 0f;
-
-        while (elapsedTime < explosionExpansionSpeed) {
-            explosion.transform.localScale = Vector3.Lerp(this.transform.localScale, explosionScale, (elapsedTime / explosionExpansionSpeed));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(explosionFadeoutDuration);
+        yield return new WaitForSeconds(explosionDuration);
 
         Destroy(this.gameObject);
+
+        yield return null;
+
     }
 
     public int GetDamageAmount() {

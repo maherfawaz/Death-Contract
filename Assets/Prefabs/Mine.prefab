@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  explosion: {fileID: 1278090422234565432}
+  explosion: {fileID: 2223624286330051508, guid: c26f1e1397bfd5e4587d4c6512268091, type: 3}
   explosionExpansionSpeed: 0.2
   explosionFadeoutDuration: 1
   explodeSFX: {fileID: 8300000, guid: d1698dd553af8ef4d887bc83b9687173, type: 3}

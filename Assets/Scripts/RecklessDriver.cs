@@ -13,6 +13,7 @@ public class RecklessDriver : MonoBehaviour
     private Vector2 destination;
 
     [Space(5)]
+    [SerializeField] private GameObject explosion;
     [SerializeField] private AudioClip crashSFX;
 
     private void Awake() 
@@ -42,9 +43,13 @@ public class RecklessDriver : MonoBehaviour
 
     public void Explode() 
     {
+        GameObject newExplosion = Instantiate(explosion, this.transform.position, Quaternion.identity);
+        newExplosion.SetActive(true);
+
         SoundEffectsManager.instance.PlayAudioClip(crashSFX);
-        Destroy(this.gameObject);
         Debug.Log("Car Exploded!");
+
+        Destroy(this.gameObject);
     }
 
     public int GetDamageAmount() 
